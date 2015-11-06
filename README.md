@@ -31,6 +31,8 @@ files:
   /etc/resolv.conf: afb773b653b26779358391137d0fbcc0
 ```
 
+For the files, the key should be the name of the inspected files and the value should be the md5sum output hash of the file.
+
 Sample output:
 
 ```
