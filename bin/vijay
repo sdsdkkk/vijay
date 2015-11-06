@@ -1,3 +1,29 @@
 #!/usr/bin/env ruby
 
-puts "It's Inspector Vijay"
+$:.unshift "#{File.expand_path(File.dirname(__FILE__))}/../lib"
+
+require 'rubygems'
+require 'bundler/setup'
+require 'vijay'
+
+if ARGV.count < 1
+  puts 'Usage:'
+  puts '  vijay <inspector configuration file>'
+  puts ''
+  puts 'Inspector configuration file must be a YAML file with the following format.'
+  puts ''
+  puts 'servers:'
+  puts '  172.16.0.1:'
+  puts '    user: someuser'
+  puts '    pass: somepass'
+  puts '  172.16.0.2:'
+  puts '    user: someuser'
+  puts '    pass: somepass'
+  puts 'files:'
+  puts '  /etc/hosts: c00db144055821cd01c1cd087fc7ad1e'
+  puts '  /etc/resolv.conf: afb773b653b26779358391137d0fbcc0'
+else
+  inspector = Vijay::Inspector.new(ARGV[0])
+  inspector.inspect!
+  inspector.report
+end
